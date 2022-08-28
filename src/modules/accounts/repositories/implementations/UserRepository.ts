@@ -9,7 +9,7 @@ class UsersRepository implements IUsersRepository {
     constructor() {
         this.repository = getRepository(User);
     }
-
+    
     async create(data: ICreateUserDTO): Promise<void> {
         const user = this.repository.create({
             name: data.name,
@@ -17,10 +17,15 @@ class UsersRepository implements IUsersRepository {
             driver_license: data.driver_license,
             password: data.password
         });
-
+        
         await this.repository.save(user);
     }
+    
+    async findByEmail(email: string): Promise<User> {
+        const user = await this.repository.findOne({ email });
 
+        return user
+    }
 }
 
 export { UsersRepository };
