@@ -30,8 +30,6 @@ export async function ensureAuthenticated(request: Request,  response: Response,
             id: user_id
         }
 
-        console.log("op", request.user);
-        
         next();
 
     } catch (error) {
