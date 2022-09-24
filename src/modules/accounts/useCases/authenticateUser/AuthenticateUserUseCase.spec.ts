@@ -1,12 +1,13 @@
-import { AppError } from "../../../../errors/AppError";
-import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
-import { UserRepositoryInMemory } from "../../repositories/in-memory/UserRepositoryInMemory";
+import { AppError } from "@errors/AppError";
+import { ICreateUserDTO } from "@modules/accounts/dtos/ICreateUserDTO";
+import { UserRepositoryInMemory } from "@modules/accounts/repositories/in-memory/UserRepositoryInMemory";
 import { CreateUserUseCase } from "../createUser/CreateUserUseCase";
-import { AuthenticateUserUseCase } from "./AuthenticateUserUseCase"
+import { AuthenticateUserUseCase } from "./AuthenticateUserUseCase";
+
 
 let authenticateUserUseCase: AuthenticateUserUseCase;
-let usersRepositoryInMemory: UserRepositoryInMemory
-let createUserUseCase: CreateUserUseCase
+let usersRepositoryInMemory: UserRepositoryInMemory;
+let createUserUseCase: CreateUserUseCase;
 
 describe("Authenticate User", () => {
 
