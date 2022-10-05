@@ -7,22 +7,25 @@ import { ISpecificationsRepository } from '@modules/cars/repositories/ISpecifica
 import { CategoriesRepository } from '@modules/cars/infra/typeorm/repoistories/CategoriesRepository';
 import { SpecificationsRepository } from '@modules/cars/infra/typeorm/repoistories/SpecificationsRepository';
 import { UsersRepository } from '@modules/accounts/infra/typeorm/repositories/UserRepository';
+import { ICarsRepository } from '@modules/cars/repositories/ICarsRepositoy';
+import { CarsRepository } from '@modules/cars/infra/typeorm/repoistories/CarsRepository';
 
-
-// ICategoriesRepository
 container.registerSingleton<ICategoriesRepository>(
     "CategoriesRepository",
     CategoriesRepository
 )
 
-// ISpecificationsRepository
 container.registerSingleton<ISpecificationsRepository>(
     "SpecificationsRepository",
     SpecificationsRepository
 )
 
-// IUsersRepository
 container.registerSingleton<IUsersRepository>(
     "UsersRepository",
     UsersRepository
+)
+
+container.registerSingleton<ICarsRepository>(
+    "CarsRepository",
+    CarsRepository
 )
