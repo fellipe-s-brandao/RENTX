@@ -9,7 +9,10 @@ import swaggerFile from "../../../swagger.json";
 
 import "@shared/container"
 
-import "@shared/infra/typeorm";
+import createConnection from "@shared/infra/typeorm";
+createConnection();
+
+console.log("teste  ")
 
 const app = express();
 
