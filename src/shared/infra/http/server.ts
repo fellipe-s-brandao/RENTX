@@ -12,8 +12,6 @@ import "@shared/container"
 import createConnection from "@shared/infra/typeorm";
 createConnection();
 
-console.log("teste  ")
-
 const app = express();
 
 app.use(express.json());
