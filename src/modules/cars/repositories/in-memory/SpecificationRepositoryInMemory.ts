@@ -4,7 +4,7 @@ import { ICreateSpecificationsDTO, ISpecificationsRepository } from "../ISpecifi
 class SpecificationRepositoryInMemory implements ISpecificationsRepository {
     specifications: Specification[] = [];
 
-    async create({ name, description }: ICreateSpecificationsDTO): Promise<void> {
+    async create({ name, description }: ICreateSpecificationsDTO): Promise<Specification> {
         const specification = new Specification();
         Object.assign(specification, {
             description,
@@ -12,6 +12,8 @@ class SpecificationRepositoryInMemory implements ISpecificationsRepository {
         });
 
         this.specifications.push(specification);
+
+        return specification;
     }
 
     async findByName(name: string): Promise<Specification> {
@@ -19,9 +21,9 @@ class SpecificationRepositoryInMemory implements ISpecificationsRepository {
     }
 
     async findByIds(ids: string[]): Promise<Specification[]> {
-        const allSpecifications = this.specifications.filter((specification => {
+        const allSpecifications = this.specifications.filter((specification) =>
             ids.includes(specification.id)
-        }));
+        );
 
         return allSpecifications;
     }
