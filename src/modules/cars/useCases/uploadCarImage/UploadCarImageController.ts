@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { container } from "tsyringe";
 import { UploadCarImageUseCase } from "./UploadCarImageUseCase";
 
-interface IFiles{
+interface IFiles {
     filename: string
 }
 
@@ -15,7 +15,7 @@ class UploadCarImageController {
 
         const images_name = images.map((file) => file.filename)
 
-        await uploadCarImageUseCase.execute({ car_id: id, images_name})
+        await uploadCarImageUseCase.execute({ car_id: id, images_name })
 
         return response.status(201).send()
     }
