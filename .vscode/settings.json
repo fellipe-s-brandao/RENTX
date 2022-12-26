@@ -1,5 +1,8 @@
 {
     "cSpell.words": [
+        "dtos",
+        "middlewares",
+        "tsyringe",
         "typeorm"
     ]
 }

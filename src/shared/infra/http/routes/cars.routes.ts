@@ -6,7 +6,7 @@ import uploadConfig from '@config/upload';
 import multer from 'multer';
 import { Router } from "express";
 import { ensureAdmin } from "../middlewares/ensureAdmin";
-import { ensureAuthenticated } from "../middlewares/ensureAutheticated";
+import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
 
 const carsRoutes = Router();
 
