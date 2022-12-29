@@ -9,7 +9,7 @@ import { ISpecificationsRepository } from '@modules/cars/repositories/ISpecifica
 import { CategoriesRepository } from '@modules/cars/infra/typeorm/repoistories/CategoriesRepository';
 import { SpecificationsRepository } from '@modules/cars/infra/typeorm/repoistories/SpecificationsRepository';
 import { UsersRepository } from '@modules/accounts/infra/typeorm/repositories/UserRepository';
-import { ICarsRepository } from '@modules/cars/repositories/ICarsRepositoy';
+import { ICarsRepository } from '@modules/cars/repositories/ICarsRepository';
 import { CarsRepository } from '@modules/cars/infra/typeorm/repoistories/CarsRepository';
 import { ICarsImagesRepository } from '@modules/cars/repositories/ICarsImagesRepository';
 import { CarsImagesRepository } from '@modules/cars/infra/typeorm/repoistories/CarsImagesRepository';
