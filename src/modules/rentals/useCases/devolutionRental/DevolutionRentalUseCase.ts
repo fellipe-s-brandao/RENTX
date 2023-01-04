@@ -3,26 +3,26 @@ import { Rental } from "@modules/rentals/infra/typeorm/entities/Rental";
 import { IRentalsRepository } from "@modules/rentals/repositories/IRentalsRepository";
 import { IDateProvider } from "@shared/container/providers/DateProvider/IDateProvider";
 import { AppError } from "@shared/errors/AppError";
-import { inject } from "tsyringe";
+import { inject, injectable } from "tsyringe";
 
 interface IRequest {
     id: string;
-    user_id: string;
 }
 
+@injectable()
 class DevolutionRentalUseCase {
     constructor(
-        @inject("RentalsRepository")
+        @inject("RentalRepository")
         private rentalsRepository: IRentalsRepository,
 
         @inject("CarsRepository")
         private carsRepository: ICarsRepository,
 
-        @inject("DayDateProvider")
+        @inject("DayJsDateProvider")
         private dateProvider: IDateProvider
     ) {}
 
-    async execute({id, user_id}: IRequest): Promise<Rental> {
+    async execute({id}: IRequest): Promise<Rental> {
         const rental = await this.rentalsRepository.findById(id);
         const car = await this.carsRepository.findById(rental.car_id);
 
@@ -55,6 +55,7 @@ class DevolutionRentalUseCase {
         }
 
         total += daily * car.daily_rate;
+
         rental.end_date = this.dateProvider.dateNow();
         rental.total = total;
 
