@@ -1,4 +1,4 @@
-    import { Car } from "@modules/cars/infra/typeorm/entities/Car";
+import { Car } from "../../../../cars/infra/typeorm/entities/Car";
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryColumn, UpdateDateColumn } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 
