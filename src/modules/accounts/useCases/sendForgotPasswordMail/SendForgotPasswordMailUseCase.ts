@@ -16,7 +16,10 @@ class SendForgotPasswordMailUseCase {
         private usersTokensRepository: IUserTokensRepository,
 
         @inject("DayJsDateProvider")
-        private dayJsDateProvider: IDateProvider
+        private dayJsDateProvider: IDateProvider,
+
+        @inject("EtherealMailProvider")
+        private mailProvider: IMailProvider
     ) { }
 
     async execute(email: string) {
@@ -34,7 +37,9 @@ class SendForgotPasswordMailUseCase {
             refresh_token: token,
             user_id: user.id,
             expires_date,
-        })
+        });
+
+        await this.mailProvider.sendEmail(email, "Recuperação de senha", `O link para o reset é ${token}`)
 
     }
 }
