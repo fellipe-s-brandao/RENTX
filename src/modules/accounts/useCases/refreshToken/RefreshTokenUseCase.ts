@@ -10,6 +10,11 @@ interface IPayload {
     email: string
 }
 
+interface ITokenResponse {
+    token: string,
+    refresh_token: string
+}
+
 @injectable()
 class RefreshTokenUseCase {
     constructor(
@@ -20,12 +25,12 @@ class RefreshTokenUseCase {
         private dayJsDateProvider: IDateProvider
     ) {}
 
-    async execute(token: string): Promise<string> {
-        const { sub, email } = verify(token, auth.secret_refresh_token) as IPayload;
+    async execute(refresh_token: string): Promise<ITokenResponse> {
+        const { sub, email } = verify(refresh_token, auth.secret_refresh_token) as IPayload;
         
         const user_id = sub;
 
-        const userToken = await this.usersTokensRepository.findByUserIdAndRefreshToken(user_id, token);
+        const userToken = await this.usersTokensRepository.findByUserIdAndRefreshToken(user_id, refresh_token);
 
         if(!userToken) {
             throw new AppError("Refresh Token does not exists!")
@@ -33,7 +38,7 @@ class RefreshTokenUseCase {
 
         await this.usersTokensRepository.deleteById(userToken.id);
 
-        const refresh_token = sign({ email }, auth.secret_refresh_token, {
+        const newRefresh_token = sign({ email }, auth.secret_refresh_token, {
             subject: sub,
             expiresIn: auth.expires_in_refresh_token
         })
@@ -44,9 +49,18 @@ class RefreshTokenUseCase {
             user_id: sub,
             refresh_token,
             expires_date: refresh_token_expires_date,
-        })
+        });
 
-        return refresh_token;
+        
+        const newToken = sign({}, auth.secret_token, {
+            subject: user_id,
+            expiresIn: auth.expires_in_token
+        });
+
+        return {
+            token: newToken,
+            refresh_token: newRefresh_token
+        };
 
     }
 }
