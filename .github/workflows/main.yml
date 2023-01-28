@@ -6,9 +6,8 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-
-    steps:
+   runs-on: ubuntu-latest
+   steps:
       - uses: actions/checkout@v37
 
       - name: Setup NodeJs
